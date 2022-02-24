@@ -10,6 +10,11 @@ class Category extends Model
 {
     use HasFactory,SoftDeletes;
 
+    public function chiedls()
+    {
+        return $this->hasMany(Category::class, 'parent_id', 'id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

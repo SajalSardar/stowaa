@@ -32,8 +32,9 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="{{ route('frontend.home') }}" class="site_title" target="_blank"><i class="fa fa-paw"></i> <span>Gentelella
-                                Alela!</span></a>
+                        <a href="{{ route('frontend.home') }}" class="site_title" target="_blank">
+                            <img src="{{ asset('frontend/images/logo/logo_1x.png') }}" alt="{{ config('app.name') }}">
+                        </a>
                     </div>
                     <div class="clearfix"></div>
 
@@ -43,7 +44,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>John Doe</h2>
+                            <h2>{{ Auth()->user()->name; }}</h2>
                         </div>
                     </div>
 
@@ -113,7 +114,7 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('backend/images/img.jpg')}}" alt="">John Doe
+                                    <img src="{{ asset('backend/images/img.jpg')}}" alt="">{{ auth()->user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">

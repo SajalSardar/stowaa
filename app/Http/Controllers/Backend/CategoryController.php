@@ -27,7 +27,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('backend.product.category.index');
+        $categories = Category::with('chiedls')->where('parent_id', null)->OrderBy('created_at', "desc")->get();
+        return view('backend.product.category.index', compact('categories'));
     }
 
     /**
@@ -59,7 +60,7 @@ class CategoryController extends Controller
         if(!empty($photo)){
             $photo_name = Str::slug($request->name).'.'. $photo->getClientOriginalExtension();
 
-            Image::make($photo)->crop(200, 200)->save(public_path('/storage/uploads/category/'.$photo_name));
+            Image::make($photo)->crop(200, 256)->save(public_path('/storage/uploads/category/'.$photo_name));
         }
 
         $category = new Category();
@@ -69,6 +70,7 @@ class CategoryController extends Controller
         $category->description = $request->description;
         $category->image = $photo_name;
         $category->save();
+        return back()->with('success', "Product Category Add Successfull!");
 
     }
 

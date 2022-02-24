@@ -32,8 +32,11 @@
                                 </label>
                                 <div class="form-group">
                                     <select name="parent" class="select2_group form-control">
-                                        <option disabled> Select Parent </option>
-                                        <option value="HI">Hawaii</option>
+                                        <option disabled selected> Select Parent </option>
+                                        @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                        
                                     </select>
                                 </div>
                             </div>
@@ -78,19 +81,47 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Image</th>
                           <th>Category</th>
+                          <th>Image</th>
                           <th>Slug</th>
                           <th>Actione</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
+                        @foreach($categories as $category)
+                          
+                          <tr>
+                            <th scope="row">{{ $category->id }}</th>
+                            <td>{{$category->name}}</td>
+                            <td>
+                              <img width="50" src="{{ asset('storage/uploads/category/'.$category->image) }}" alt="{{ $category->name }}">
+                            </td>
+                            
+                            <td>{{ $category->slug }}</td>
+                            <td>
+                              <a href="#" class="btn  btn-primary btn-sm">View</a>
+                            </td>
+                          </tr>
+                          
+                          @if ($category->chiedls)
+                              @foreach ($category->chiedls as $chiedl)
+                               
+                                <tr>
+                                  <td>
+                                    <p></p>
+                                  </td>
+                                  <td>{{ __('--') }} {{ $chiedl->name}}</td>
+                                  <td>
+                                    <img width="50" src="{{ asset('storage/uploads/category/'.$chiedl->image) }}" alt="{{ $chiedl->name }}">
+                                  </td>
+                                  <td>{{ $chiedl->slug }}</td>
+                                  <td>
+                                    <a href="#" class="btn  btn-primary btn-sm">View</a>
+                                  </td>
+                                </tr>
+                                @endforeach
+                          @endif
+                        @endforeach
                       </tbody>
                     </table>
 
