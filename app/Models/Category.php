@@ -10,10 +10,7 @@ class Category extends Model
 {
     use HasFactory,SoftDeletes;
 
-    public function chiedls()
-    {
-        return $this->hasMany(Category::class, 'parent_id', 'id');
-    }
+    
 
     /**
      * The attributes that are mass assignable.
@@ -28,4 +25,37 @@ class Category extends Model
         'image',
         'status',
     ];
+
+    /**
+     * Show Childe category.
+     */
+    public function chiedls()
+    {
+        return $this->hasMany(Category::class, 'parent_id', 'id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id', 'id');
+    }
+
+    public function scopeParent($query)
+    {
+        $query->where('parent_id', null);
+    }
+
+    public function scopeParentWithChild($query)
+    {
+        $query->with('chiedls')->where('parent_id', null);
+    }
+
+    public function scopeChild($query)
+    {
+        $query->where('parent_id', '!=', null);
+    }
+
+    public function scopeChildWithParent($query)
+    {
+        $query->with('parent')->where('parent_id', '!=', null);
+    }
 }

@@ -21,7 +21,7 @@
     <link href="{{ asset('backend/css/daterangepicker.css') }}" rel="stylesheet">
 
     <link href="{{ asset('backend/css/custom.min.css') }}" rel="stylesheet">
-
+    @yield('backend_css')
 
 
 </head>
@@ -57,7 +57,10 @@
                                 <li><a href="{{ route('backend.home') }}"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-edit"></i> Product <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
+                                        <li><a href="{{ route('backend.product.create') }}">Add Product</a></li>
                                         <li><a href="{{ route('backend.category.index') }}">Category</a></li>
+                                        <li><a href="{{ route('backend.productsize.index') }}">Add Size </a></li>
+                                        <li><a href="{{ route('backend.productcolor.index') }}">Add Color </a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
@@ -75,10 +78,6 @@
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="e_commerce.html">E-commerce</a></li>
-                                        <li><a href="projects.html">Projects</a></li>
-                                        <li><a href="project_detail.html">Project Detail</a></li>
-                                        <li><a href="contacts.html">Contacts</a></li>
-                                        <li><a href="profile.html">Profile</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -239,6 +238,7 @@
     <script src="{{ asset('backend/js/bootstrap-progressbar.min.js') }}"></script>
 
     <script src="{{ asset('backend/js/custom.min.js') }}"></script>
+    @yield('backend_js')
 
 </body>
 

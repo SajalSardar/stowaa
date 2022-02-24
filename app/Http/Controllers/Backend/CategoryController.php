@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('chiedls')->where('parent_id', null)->OrderBy('created_at', "desc")->get();
+        $categories = Category::ParentWithChild()->OrderBy('created_at', "desc")->get();
         return view('backend.product.category.index', compact('categories'));
     }
 

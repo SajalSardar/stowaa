@@ -1,10 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\ProductsizeController;
+use App\Http\Controllers\Backend\ProductcolorController;
+use App\Http\Controllers\Backend\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +27,8 @@ Auth::routes();
 Route::name('backend.')->group(function(){
     Route::get('/dashboard', [BackendController::class, 'index'])->name('home');
 
-    Route::resource('category', CategoryController::class);
+    Route::resource('/category', CategoryController::class)->except(['show','create']);
+    Route::resource('/productsize', ProductsizeController::class)->except(['show','create']);
+    Route::resource('/productcolor', ProductcolorController::class)->except(['show','create']);
+    Route::resource('/product', ProductController::class);
 });
