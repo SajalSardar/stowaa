@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +21,8 @@ Route::get('/', [FrontendController::class, 'index'])->name('frontend.home');
 
 Auth::routes();
 
-Route::get('/dashboard', [BackendController::class, 'index'])->name('backend.home');
+Route::name('backend.')->group(function(){
+    Route::get('/dashboard', [BackendController::class, 'index'])->name('home');
+
+    Route::resource('category', CategoryController::class);
+});
