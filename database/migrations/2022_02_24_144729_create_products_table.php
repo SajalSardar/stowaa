@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
+            $table->string('sku');
             $table->text('shot_description')->nullable();
             $table->longText('description')->nullable();
             $table->longText('additional_info')->nullable();

@@ -20,18 +20,39 @@
                         <br>
                         <form method="POST" action="{{ route('backend.product.store') }}" enctype="multipart/form-data" >
                             @csrf
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label for="first-name">Product Title <span class="required">*</span>
+                                    </label>
+                                    <div class="form-group">
+                                        <input type="text" id="title"  name="title" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label >Category <span class="required">*</span>
+                                    </label>
+                                    <div class="form-group">
+                                        <select name="categories[]" class="form-control select_two" multiple>
+                                            <option disabled>Select Category</option>
+                                            @foreach ($categoris as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-sm-6 form-group">
-                                <label for="first-name">Product Title <span class="required">*</span>
+                                <label >SKU Code <span class="required">*</span>
                                 </label>
                                 <div class="form-group">
-                                    <input type="text" id="title" required="required" name="title" class="form-control">
+                                    <input type="text"  name="sku" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Main Image <span class="required">*</span>
                                 </label>
                                 <div class="form-group">
-                                    <input type="file" required="required" name="photo" class="form-control">
+                                    <input type="file"  name="photo" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-12 form-group">
@@ -59,7 +80,7 @@
                                 <label>Regular Price<span class="required">*</span>
                                 </label>
                                 <div class="form-group">
-                                    <input type="number" required="required" name="regular_price" class="form-control">
+                                    <input type="number"  name="regular_price" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-6 form-group">
@@ -91,10 +112,10 @@
                                                 <div class="collapse card mb-2" id="size_{{ $size->id }}_color_{{ $color->id }}">
                                                     <div class="card-body p-2">
                                                         <div class="form-group">
-                                                            <input type="text" name="attr[{{$size->id}}][{{ $color->id }}]['quantity'][]" placeholder="Color Wais Quantity" class="form-control">
+                                                            <input type="text" name="attr[{{$size->id}}][{{ $color->id }}][quantity]" placeholder="Color Wise Quantity" class="form-control">
                                                         </div>
                                                         <div class="form-group mb-0">
-                                                            <input type="text" name="attr[{{$size->id}}][{{ $color->id }}]['add_price'][]" placeholder="Color Wais Additional Price" class="form-control">
+                                                            <input type="text" name="attr[{{$size->id}}][{{ $color->id }}][add_price]" placeholder="Color Wise Additional Price" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -106,7 +127,7 @@
                             </div>
                             <div class="col-sm-12 mt-2">
                                 <h5>Product Galery Images:</h5>
-                                <input type="file" name="galery[]" class="form-control" multiple>
+                                <input type="file" name="galeries[]" class="form-control" multiple>
                             </div>
                             <div class="form-group col-sm-12 mt-5">
                                 <button type="reset" class="btn btn-warning btn-lg">Reset</button>
@@ -124,10 +145,12 @@
 
 @section('backend_css')
     <link rel="stylesheet" href="{{ asset('backend/css/summernote-bs4.min.css') }}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
 @endsection
 
 @section('backend_js')
     <script src="{{ asset('backend/js/summernote-bs4.min.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             $('.summernote').summernote({
@@ -143,6 +166,10 @@
                     ['view', ['fullscreen', 'codeview', 'help']]
                 ]
             });
+
+            
+            $('.select_two').select2();
+            
         });
     </script>
 @endsection

@@ -26,6 +26,10 @@ class Category extends Model
         'status',
     ];
 
+    public function products(){
+        return $this->belongsToMany(Product::class)->withTimestamps();
+    }
+
     /**
      * Show Childe category.
      */
